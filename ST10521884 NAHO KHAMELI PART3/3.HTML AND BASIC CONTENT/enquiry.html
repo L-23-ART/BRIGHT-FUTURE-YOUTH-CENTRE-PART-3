@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Join Us | Bright Future Youth Centre</title>
+  <meta name="description" content="Volunteer, sponsor or enquire about programmes at Bright Future Youth Centre.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <h1>Bright Future Youth Centre</h1>
+    <nav class="main-nav">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="services.html">What We Do</a></li>
+        <li><a href="enquiry.html">Join Us</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>Get Involved</h2>
+      <p>We need people like you to help us change lives. Whether you want to give your time
+         or your money, every bit helps.</p>
+
+      <h3>Your Details</h3>
+      <!-- action attribute set (Section 4.1 Form Submission) -->
+      <form id="enquiryForm" action="https://jsonplaceholder.typicode.com/posts" method="post" novalidate>
+        <label for="fullName">Full Name:</label>
+        <input type="text" id="fullName" name="fullName" required minlength="2">
+
+        <label for="email">Email Address:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="phone">Phone Number:</label>
+        <input type="tel" id="phone" name="phone" required pattern="[0-9+ ]{10,15}"
+               title="10-15 digits">
+
+        <label for="want">I want to:</label>
+        <select id="want" name="want" required>
+          <option value="">--Please choose--</option>
+          <option value="volunteer">Volunteer my time</option>
+          <option value="sponsor">Become a sponsor</option>
+          <option value="programme">Enquire about a programme</option>
+        </select>
+
+        <label for="programme">Which programme interests you?</label>
+        <select id="programme" name="programme">
+          <option value="">--Please choose--</option>
+          <option>After-School Homework Help</option>
+          <option>Computer Skills Classes</option>
+          <option>Sports and Fitness</option>
+          <option>Job Readiness Training</option>
+          <option>Arts and Music</option>
+          <option>Counselling and Support</option>
+        </select>
+
+        <p id="formMsg" class="form-error"></p>
+        <button type="submit" class="btn">Submit Enquiry</button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer"><p>&copy; 2026 Bright Future Youth Centre</p></footer>
+
+  <script>
+  document.getElementById('enquiryForm').addEventListener('submit', async function (e) {
+    e.preventDefault();
+    var msg = document.getElementById('formMsg');
+    msg.textContent = '';
+    msg.className = 'form-error';
+
+    /* Client-side validation + error messages */
+    if (!this.checkValidity()) {
+      msg.textContent = 'Please fill in all required fields correctly (phone: 10-15 digits).';
+      return;
+    }
+
+    /* AJAX submission, then a response about availability */
+    try {
+      var res = await fetch(this.action, { method: 'POST', body: new FormData(this) });
+      if (!res.ok) throw new Error('Server error');
+      msg.className = 'form-success';
+      msg.textContent = 'Thank you! Your enquiry has been received - we will contact you '
+        + 'within 2 working days with details about availability and next steps.';
+      this.reset();
+    } catch (err) {
+      msg.textContent = 'Submission failed - please try again or call us on +27 11 234 5678.';
+    }
+  });
+  </script>
+</body>
+</html>

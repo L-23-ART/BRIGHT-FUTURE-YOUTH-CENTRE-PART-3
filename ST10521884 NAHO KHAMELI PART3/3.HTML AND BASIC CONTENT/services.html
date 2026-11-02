@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What We Do | Bright Future Youth Centre</title>
+<meta name="description" content="Bright Future Youth Centre supports young people through education, computer skills, sports and career training.">
+<link rel="stylesheet" href="css/style.css"></head><body>
+<header class="site-header">
+  <h1>Bright Future Youth Centre</h1>
+  <nav class="main-nav" aria-label="Main navigation"><ul>
+    <li><a href="index.html">Home</a></li><li><a href="about.html">About Us</a></li>
+    <li><a href="services.html">What We Do</a></li><li><a href="gallery.html">Gallery</a></li>
+    <li><a href="enquiry.html">Join Us</a></li><li><a href="contact.html">Contact</a></li>
+  </ul></nav>
+</header><main><section><h2>Our Programmes</h2><p>We run free programmes to help young people learn, grow, and prepare for their future.</p>
+<input type="search" id="programmeSearch" placeholder="Search programmes (e.g. soccer, coding)" aria-label="Search programmes">
+<div id="programmeList" class="cards"></div><p id="noResults" style="display:none">No programmes match your search.</p></section></main><footer class="site-footer"><p>&copy; 2026 Bright Future Youth Centre. Helping young people build a better tomorrow.</p></footer>
+<script>
+const programmes = [
+{title:"After-School Homework Help",text:"Qualified tutors help learners with Maths, Science and English from Monday to Thursday."},
+{title:"Computer Skills Classes",text:"Free classes in Microsoft Office, internet safety and basic coding."},
+{title:"Sports and Fitness",text:"Soccer, netball and athletics clubs that build teamwork and discipline."},
+{title:"Job Readiness Training",text:"CV writing, interview preparation and workplace skills."},
+{title:"Arts and Music",text:"Drama, painting and music lessons for creative expression."},
+{title:"Counselling and Support",text:"Private support for young people dealing with stress, family or school problems."}
+];
+function renderProgrammes(items){document.getElementById("programmeList").innerHTML=items.map(p=>`<article class="card"><h3>${p.title}</h3><p>${p.text}</p></article>`).join("");document.getElementById("noResults").style.display=items.length?"none":"block";}
+renderProgrammes(programmes);
+document.getElementById("programmeSearch").addEventListener("input",e=>{const q=e.target.value.toLowerCase();renderProgrammes(programmes.filter(p=>(p.title+" "+p.text).toLowerCase().includes(q)));});
+</script>
+</body></html>
